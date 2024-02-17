@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using ManejoPresupuesto.Models;
 using ManejoPresupuesto.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Reflection;
 
 namespace ManejoPresupuesto.Controllers
 {
+
     public class TransaccionController: Controller
     {
         private readonly IServicioUsuario servicioUsuario;
