@@ -10,7 +10,10 @@ namespace ManejoPresupuesto.Models
         [Display(Name ="Fecha Transacción")]
         [DataType(DataType.Date)]
         public DateTime FechaTransaccion { get; set; } = DateTime.Today;
+
+        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
         public decimal Monto { get; set; }
+
         [Range(1, maximum:int.MaxValue,ErrorMessage ="Debe seleccionar una categoría")]
         [Display(Name = "Categoria")]
         public int CategoriaId { get; set; }

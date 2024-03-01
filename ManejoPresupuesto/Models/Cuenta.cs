@@ -13,6 +13,8 @@ namespace ManejoPresupuesto.Models
         [Display(Name = "Tipo Cuenta")]
         public int TipoCuentaId { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
+
         public decimal Balance { get; set; }
 
         [StringLength(maximumLength: 1000)]
