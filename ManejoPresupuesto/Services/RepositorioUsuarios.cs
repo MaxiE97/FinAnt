@@ -7,7 +7,10 @@ namespace ManejoPresupuesto.Services
     public interface IRepositorioUsuarios
     {
         Task<Usuario> BuscarUsuarioPorEmail(string emailNormalizado);
+        Task<Usuario> BuscarUsuarioPorId(int usuarioId);
         Task<int> CrearUsuario(Usuario usuario);
+        Task<int> CrearUsuarioInvitado();
+        Task EliminarUsuarioInvitado(int usuarioId);
     }
     public class RepositorioUsuarios: IRepositorioUsuarios
     {
@@ -34,7 +37,32 @@ namespace ManejoPresupuesto.Services
 
             return usuarioId;
 
-        }        
+        }
+
+        public async Task<int> CrearUsuarioInvitado()
+        {
+            using var connection = new SqlConnection(_connectionString);
+            // Ejecuta el procedimiento almacenado y retorna el ID del usuario invitado creado
+            var usuarioId = await connection.QuerySingleAsync<int>("CrearUsuarioInvitado", commandType: System.Data.CommandType.StoredProcedure);
+            return usuarioId;
+        }
+
+        public async Task<Usuario> BuscarUsuarioPorId(int usuarioId)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            return await connection.QuerySingleOrDefaultAsync<Usuario>(
+                "SELECT * FROM Usuario WHERE Id = @usuarioId",
+                new { usuarioId });
+        }
+
+        public async Task EliminarUsuarioInvitado(int usuarioId)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            // Asegúrate de que el nombre del procedimiento almacenado coincida con el que has creado
+            await connection.ExecuteAsync("EliminarUsuarioInvitado", new { UsuarioId = usuarioId },
+                commandType: System.Data.CommandType.StoredProcedure);
+        }
+
 
         public async Task<Usuario> BuscarUsuarioPorEmail(string emailNormalizado)
         {

@@ -1,15 +1,43 @@
 ﻿@model IEnumerable<TipoCuenta>
 
+@{
+    ViewData["Title"] = "Tipos Cuentas";
+}
 
-@{ViewData["Title"] = "Tipos Cuentas";}
+<style>
 
-<h1>Tipos de Cuentas</h1>
-<h5>El tipo de cuenta se refiere a cómo podemos agrupar cuentas. Ejemplos: Préstamos, tarjetas de crédito, etc.</h5>
+    .custom-table {
+        border-collapse: separate;
+        border-spacing: 0 0.5em; /* Espacio entre filas */
+        background-color: #fff; /* Fondo blanco para la tabla */
+    }
 
-<a asp-action="Crear" class="btn btn-primary mb-3">Crear nuevo</a>
+        .custom-table th, .custom-table td {
+            border: 1px solid #dee2e6; /* Borde sutil para las celdas */
+            padding: .75rem; /* Espaciado interno */
+        }
 
-<table class="table">
-    <thead>
+        .custom-table thead th {
+            background-color: #6c757d; /* Fondo oscuro para el encabezado */
+            color: #fff; /* Texto claro */
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #e9ecef; /* Resaltado al pasar el mouse */
+    }
+
+    .btn-primary, .btn-danger {
+        margin-right: 5px; /* Espaciado entre botones */
+    }
+</style>
+
+<h1 style="color: #343a40;">Tipo de Cuentas</h1>
+<h5 style="opacity: 0.8; color: #6c757d;" class="mb-4"> En esta sección usted podrá indicar la manera en que sus diferentes cuentas se pueden agrupar.</h5>
+
+<a asp-action="Crear" class="btn btn-lg btn-outline-dark mb-2">Añadir nuevo tipo</a>
+
+<table class="table custom-table table-hover mb-5">
+    <thead class="custom-header">
         <tr>
             <th>Acciones</th>
             <th>Nombre</th>
@@ -21,16 +49,17 @@
             <tr>
                 <td>
                     <input type="hidden" value="@tipoCuenta.Id" class="ids" />
-                    <a class="btn btn-primary" asp-action="Editar" asp-route-id="@tipoCuenta.Id">Editar</a>
-                    <a class="btn btn-danger" asp-action="Borrar" asp-route-id="@tipoCuenta.Id"> Borrar</a>
+                    <a class="btn btn-sm btn-outline-primary" asp-action="Editar" asp-route-id="@tipoCuenta.Id">Editar</a>
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Borrar" asp-route-id="@tipoCuenta.Id">Borrar</a>
                 </td>
-                <td>
-                    @tipoCuenta.Nombre
-                </td>
+                <td>@tipoCuenta.Nombre</td>
             </tr>
         }
     </tbody>
 </table>
+
+
+<a class="btn btn-outline-secondary" asp-controller="Cuentas" asp-action="Index">Volver</a>
 
 
 @section Scripts {
@@ -75,4 +104,4 @@
 
     </script>
 
-}
+} 

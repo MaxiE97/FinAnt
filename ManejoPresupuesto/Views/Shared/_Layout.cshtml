@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.ViewFeatures
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,36 +14,53 @@
     <link rel="stylesheet" href="ManejoPresupuesto.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="~/lib/fullcalendar/main.min.css" />
+    <style>
+        a.navbar-brand {
+            white-space: normal;
+            text-align: center;
+            word-break: break-all;
+            font-weight: bold; /* Hace el texto más grueso */
+            color: #505050 !important; /* Cambia el color para hacerlo más llamativo*/
+            font-size: 1.5rem; /* Aumenta el tamaño del texto */
+            text-shadow: 0px 0px 2px rgba(0,0,0,0.3); /* Añade sombra al texto para mejorar la legibilidad */
+        }
+
+
+    
+    </style>
 </head>
+
+
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand"  asp-controller="Transaccion" asp-action="Index">FinAnt</a>
+                <a class="navbar-brand" asp-controller="Transaccion" asp-action="Index">FinAnt</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <div class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark"  asp-controller="Transaccion" asp-action="Index">Transacciones</a>
+                            <a class="nav-link text-dark @IsActive("Transaccion")" asp-controller="Transaccion" asp-action="Index">Transacciones</a>
+                        </li>
+                        <li class="nav-item">                 
+                            <a class="nav-link text-dark @IsActive("Cuentas", "TipoCuenta")" asp-controller="Cuentas" asp-action="Index">Cuentas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Cuentas" asp-action="Index">Cuentas</a>
+                            <a class="nav-link text-dark @IsActive("Categoria")" asp-controller="Categoria" asp-action="Index">Categorías</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="TipoCuenta" asp-action="Index">Tipo Cuenta</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Categoria" asp-action="Index">Categorías</a>
-                        </li>
-                    </ul>
+                    </div>
+
+
                     <partial name="_LinksLogin" />
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -48,15 +68,39 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - ManejoPresupuesto - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container text-center">
+            &copy; 2024 - Hecho con <span style="color: red;">♥</span> por Maximiliano Olivera - <a asp-area="" asp-controller="Home" asp-action="Privacy">Contacto</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+
+
 </body>
 </html>
+
+@functions {
+    public string IsActive(params string[] controllers)
+    {
+        var activeController = (string)ViewContext.RouteData.Values["controller"];
+
+        foreach (var controller in controllers)
+        {
+            if (controller == activeController)
+            {
+                return "nav-link-active";
+            }
+        }
+
+        return "";
+    }
+}
+
+
+

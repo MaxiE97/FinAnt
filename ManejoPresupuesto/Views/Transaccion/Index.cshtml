@@ -6,8 +6,13 @@
 
 <partial name="_Submenu" Model="SubmenuTransacciones.Diario" />
 
-<div class="mb-3">
-    <a asp-action="Crear" class="btn btn-primary">Crear una nueva transacción</a>
+
+
+<div class="text-center">
+    <a asp-action="Crear" class="btn btn-outline-dark btn-lg mb-3">Nueva transacción</a>
+    <a asp-action="Transferir" class="btn btn-outline-dark btn-lg mb-3">Nueva transferencia</a>
 </div>
+
+
 
 <partial name="_ReporteTransaccionesDetalladas" model="Model" />

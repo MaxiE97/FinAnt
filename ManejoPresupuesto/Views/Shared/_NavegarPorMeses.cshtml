@@ -1,9 +1,22 @@
 ﻿@model DateTime
 
-<h4>
-    <a asp-route-mes="@ViewBag.mesAnterior" asp-route-año="@ViewBag.añoAnterior"
-       class="btn btn-secondary"><i class="bi-chevron-left"></i></a>
-    @Model.ToString("MMM") - @Model.Year
-    <a asp-route-mes="@ViewBag.mesPosterior" asp-route-año="@ViewBag.añoPosterior"
-       class="btn btn-secondary"><i class="bi-chevron-right"></i></a>
-</h4>
+<style>
+    .fondo-sutil {
+        background-color: #f8f9fa; 
+        background-image: linear-gradient(315deg, #f8f9fa 0%, #e9ecef 74%); 
+        padding: 15px; 
+        border-radius: 10px; 
+    }
+</style>
+
+<div class="fondo-sutil mb-2">
+    <h4 class="d-flex align-items-center justify-content-center">
+        <a asp-route-mes="@ViewBag.mesAnterior" asp-route-año="@ViewBag.añoAnterior"
+           class="btn btn-dark btn-sm me-2" style="padding: 0 6px;"><i class="bi-chevron-left"></i></a>
+        @Model.ToString("MMMM") - @Model.Year
+        <a asp-route-mes="@ViewBag.mesPosterior" asp-route-año="@ViewBag.añoPosterior"
+           class="btn btn-dark btn-sm ms-2" style="padding: 0 6px;"><i class="bi-chevron-right"></i></a>
+    </h4>
+</div>
+
+

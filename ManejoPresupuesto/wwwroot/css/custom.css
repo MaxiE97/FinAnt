@@ -17,3 +17,6 @@
     color:indianred
 }
 
+.nav-link-active {
+    font-weight: bold;
+}

@@ -6,10 +6,32 @@
 }
 
 
-<h1>Regístrate</h1>
 
 
-<div class="card">
+
+
+<style>
+    .btn-custom {
+        background-color: lightseagreen; /* Color de fondo verde */
+        color: white; /* Color del texto */
+        border: none; /* Sin borde */
+        padding: 10px 20px; /* Ajusta el padding según necesites */
+        cursor: pointer; /* Cambia el cursor a tipo puntero */
+        border-radius: 5px; /* Bordes redondeados */
+    }
+
+        .btn-custom:hover {
+            background-color: lightseagreen; /* Color más oscuro al pasar el mouse */
+        }
+
+
+</style>
+
+<h1>
+    Regístrate 
+</h1>
+
+<div class="card mb-3" style="min-width: 450px; max-height: 350px; overflow: auto;">
     <div class="card-body">
         <form asp-action="Registro">
             <div asp-validation-summary="ModelOnly" class="textalert-danger"></div>
@@ -25,13 +47,19 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <button class="btn-primary btn">Regístrate</button>
+            <button class="btn-primary btn">Registrar cuenta</button>
             <a class="btn btn-success" asp-action="login">Deseo Loguearme</a>
-
-
         </form>
     </div>
 </div>
+<div class="text-center ">
+    <!-- Añade un margen superior con mt-3 si es necesario -->
+    <a class="btn btn-custom" asp-action="AccederComoInvitado">Ingresar como invitado</a>
+</div>
+
+@*     <a class="btn btn-custom" asp-action="login">Ingresar como invitado</a>
+ *@
+
 
 
 

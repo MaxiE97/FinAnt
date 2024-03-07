@@ -2,52 +2,70 @@
 
 @{
     var resumenMontos = new ResumenMontoViewModel()
-    {
-        Ingresos = Model.BalanceDepositos,
-        Gastos = Model.BalanceRetiros,
-        Total =  Model.Total
-
-    };
+            {
+                Ingresos = Model.BalanceDepositos,
+                Gastos = Model.BalanceRetiros,
+                Total = Model.Total
+            };
 }
 
 <partial name="_NavegarPorMeses" model="@Model.FechaInicio" />
-
 <partial name="_ResumenMontos" model="@resumenMontos" />
 
 @if (Model.TransaccionesAgrupadas.Count() == 0)
 {
-    <h5>No hay datos para mostrar</h5>
+    <div class="text-center" style="position: relative;">
+        <img src="/images/hormigaPobre.jpg" alt="No hay datos" style="opacity: 0.85; width: 100px; margin-top: 20px;">
+        <h5 style="font-family: 'Arial', sans-serif; color: rgba(0, 0, 0, 0.75);">No hay transacciones para mostrar</h5>
+
+    </div>
+
+
 }
 else
 {
-    <table class="table">
-        <tbody>
-            @foreach (var transaccionAgrupada in Model.TransaccionesAgrupadas)
-            {
-                <tr style="background-color:lightblue; font-size:26px">
-                    <td colspan="3">
-                        @transaccionAgrupada.FechaTransaccion.Day
-                        <span class="badge bg-secondary">
-                            @transaccionAgrupada.FechaTransaccion.ToString("ddd")
-                        </span>
-                    </td>
-                    <td class="activo">@transaccionAgrupada.BalanceDepositos.ToString("N")</td>
-                    <td class="pasivo">@transaccionAgrupada.BalanceRetiros.ToString("N")</td>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Categoría</th>
+                    <th>Cuenta</th>
+                    <th>Ingresos</th>
+                    <th>Gastos</th>
                 </tr>
-                @foreach (var transaccion in transaccionAgrupada.Transacciones)
+            </thead>
+            <tbody>
+                @foreach (var transaccionAgrupada in Model.TransaccionesAgrupadas)
                 {
-                    <tr style="vertical-align:middle">
-                        <td>
-                            <a asp-controller="transaccion" asp-action="Editar"
-                               asp-route-id="@transaccion.Id" asp-route-UrlRetorno="@ViewBag.urlRetorno"><i class="bi-pencil"></i></a>
+                    <tr style="background-color:#f8f9fa; font-weight:bold;">
+                        <td colspan="5">
+                            @transaccionAgrupada.FechaTransaccion.ToString("dd MMM yyyy")
+                            <span class="badge bg-secondary">
+                                @transaccionAgrupada.FechaTransaccion.ToString("ddd")
+                            </span>
                         </td>
-                        <td>@transaccion.Categoria</td>
-                        <td>@transaccion.Cuenta</td>
-                        <td class="activo">@(transaccion.TipoOperacionId == TipoOperacion.Ingreso ? transaccion.Monto.ToString("N") : null) </td>
-                        <td class="pasivo">@(transaccion.TipoOperacionId == TipoOperacion.Gasto ? transaccion.Monto.ToString("N") : null)</td>
                     </tr>
+                    @foreach (var transaccion in transaccionAgrupada.Transacciones)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="transaccion" asp-action="Editar" asp-route-id="@transaccion.Id" asp-route-UrlRetorno="@ViewBag.urlRetorno" class="btn btn-outline-primary btn-sm"><i class="bi-pencil"></i></a>
+                            </td>
+                            <td>@transaccion.Categoria</td>
+                            <td>@transaccion.Cuenta</td>
+                            <td class="activo">@if (transaccion.TipoOperacionId == TipoOperacion.Ingreso)
+                                {
+                                    @transaccion.Monto.ToString("N")
+                                }</td>
+                            <td class="pasivo">@if (transaccion.TipoOperacionId == TipoOperacion.Gasto)
+                                {
+                                    @transaccion.Monto.ToString("N")
+                                }</td>
+                        </tr>
+                    }
                 }
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 }

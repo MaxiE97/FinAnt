@@ -11,23 +11,35 @@
     };
 }
 
+<style>
+    .fondo-sutil {
+        background-color: #f8f9fa; /* Un gris muy claro como base */
+        background-image: linear-gradient(315deg, #f8f9fa 0%, #e9ecef 74%); /* Un sutil gradiente */
+        padding: 15px; /* Añade algo de espacio alrededor del contenido para que el fondo sea visible */
+        border-radius: 10px; /* Opcional: Añade bordes redondeados para un look más suave */
+    }
+</style>
+
 <partial name="_Submenu" Model="SubmenuTransacciones.Mensual" />
 
-<h4>
-    Mostrando transacciones de
-    <a asp-route-año="@añoAnterior" class="btn btn-secondary">
-        <i class="bi-chevron-left"></i>
-    </a>@Model.Año
-    <a asp-route-año="@añoPosterior" class="btn btn-secondary">
-        <i class="bi-chevron-right"></i>
-    </a>
-</h4>
+<div class="fondo-sutil mb-2">
+    <h4 class="d-flex align-items-center justify-content-center">
+        <a asp-route-año="@añoAnterior" class="btn btn-dark btn-sm me-2" style="padding: 0 6px;">
+            <i class="bi-chevron-left"></i>
+        </a>
+         Año @Model.Año
+        <a asp-route-año="@añoPosterior" class="btn btn-dark btn-sm ms-2" style="padding: 0 6px;">
+            <i class="bi-chevron-right"></i>
+        </a>
+    </h4>
+</div>
+
 
 <partial name = "_ResumenMontos" model="@resumenMontos" />
 
 <table class="table" style="font-size: 20px">
     <thead>
-        <tr style="background-color: lightblue">
+        <tr>
             <th>Mes</th>
             <th style="text-align: right">Ingresos</th>
             <th style="text-align: right">Gastos</th>

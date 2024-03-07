@@ -243,6 +243,53 @@ namespace ManejoPresupuesto.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Transferir()
+        {
+            var usuarioId = servicioUsuario.ObternerUsuarioId();
+            var modelo = new TransferenciaViewModel
+            {
+                // Inicializar las listas de selección, etc.
+                Cuentas = await ObtenerCuentas(usuarioId)
+            };
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Transferir(TransferenciaViewModel modelo)
+        {
+            var usuarioId = servicioUsuario.ObternerUsuarioId();
+
+            var transaccionGasto = new TransaccionCreacionViewModel
+            {
+                CuentaId = modelo.CuentaId,
+                FechaTransaccion = modelo.FechaTransaccion,
+                Monto = -modelo.Monto, // Monto negativo porque es un gasto
+                Nota = modelo.Nota,
+                TipoOperacionId = TipoOperacion.Gasto,
+                UsuarioId = usuarioId,
+                CategoriaId = 1 //id categoría transacción origen persistida en bd
+            };
+            await repositorioTransaccion.Crear(transaccionGasto);
+
+            // Crear la transacción de ingreso en la cuenta destino
+            var transaccionIngreso = new TransaccionCreacionViewModel
+            {
+                CuentaId = modelo.CuentaDestinoId,
+                FechaTransaccion = modelo.FechaTransaccion,
+                Monto = modelo.Monto, // Monto positivo porque es un ingreso
+                Nota = modelo.Nota,
+                TipoOperacionId = TipoOperacion.Ingreso,
+                UsuarioId = usuarioId,
+                CategoriaId = 2 //id categoría transacción destino persistida en bd
+
+            };
+            await repositorioTransaccion.Crear(transaccionIngreso);
+
+            return RedirectToAction("Index"); // Redirigir al usuario a donde consideres apropiado
+        }
+
+
+        [HttpGet]
         public async Task<IActionResult> Editar(int id,string urlRetorno = null)
         {
             var usuarioId = servicioUsuario.ObternerUsuarioId();

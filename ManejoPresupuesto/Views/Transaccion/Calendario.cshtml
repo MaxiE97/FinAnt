@@ -37,36 +37,34 @@
 
 @section Scripts {
     <script src="~/lib/fullcalendar/main.min.js"></script>
-
+    <script src="~/lib/fullcalendar/locales/es.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function(){
+        document.addEventListener("DOMContentLoaded", function () {
             const calendarioEl = document.getElementById('calendario');
             const calendario = new FullCalendar.Calendar(calendarioEl, {
+                locale: 'es', // Configura el idioma a español
                 dayMaxEventRows: 3,
                 initialView: 'dayGridMonth',
                 events: '/transaccion/ObtenerTransaccionesCalendario',
-                dateClick: async function (info){
+                dateClick: async function (info) {
                     await buscarTransaccionesPorFecha(info.dateStr);
                 }
-                
             });
 
             calendario.render();
         });
 
         async function buscarTransaccionesPorFecha(fecha) {
-            const response = await
-                fetch(`/transaccion/ObtenerTransaccionesPorFecha?fecha=${fecha}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-
+            const response = await fetch(`/transaccion/ObtenerTransaccionesPorFecha?fecha=${fecha}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
 
             const json = await response.json();
-            
+
             let ingresos = 0;
             let gastos = 0;
             const tipoOperacionesIngresos = 1;
@@ -77,43 +75,32 @@
             });
 
             const filas = json.map(transaccion => {
-
                 if (transaccion.tipoOperacionId === tipoOperacionesIngresos) {
                     ingresos += transaccion.monto;
-                }
-                else {
+                } else {
                     gastos += transaccion.monto;
                 }
 
                 return `<tr>
-                    <td>${transaccion.categoria}</td>
-                    <td>${transaccion.cuenta}</td>
-                    <td align="right" colspan="2"
-                        class=${transaccion.tipoOperacionId === tipoOperacionesIngresos ?
-                        'activo' : 'pasivo'}>
-                        
-                        ${formateador.format(transaccion.monto)}
-                    </td>
-                </tr>`;
+                            <td>${transaccion.categoria}</td>
+                            <td>${transaccion.cuenta}</td>
+                            <td align="right" colspan="2" class=${transaccion.tipoOperacionId === tipoOperacionesIngresos ? 'activo' : 'pasivo'}>
+                                ${formateador.format(transaccion.monto)}
+                            </td>
+                        </tr>`;
             });
 
-
             $("#modalTablaCuerpo").html(filas);
-            $("#modalTablaIngresos").html(formateador.format(ingresos));
-            $("#modalTablaGastos").html(formateador.format(gastos));
+            $("#modalTablaIngreso").html(formateador.format(ingresos)); // Asegúrate de que el ID sea correcto, podría ser modalTablaIngresos
+            $("#modalTablaGasto").html(formateador.format(gastos)); // Asegúrate de que el ID sea correcto, podría ser modalTablaGastos
             $("#modalTablaFecha").html(fecha);
 
-            const modalTransacciones =
-                new bootstrap.Modal(document.getElementById('modalTransacciones'));
-
+            const modalTransacciones = new bootstrap.Modal(document.getElementById('modalTransacciones'));
             modalTransacciones.show();
         }
-
-
-
     </script>
-
-
-
-
 }
+
+
+
+

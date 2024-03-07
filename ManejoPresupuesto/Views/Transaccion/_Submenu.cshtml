@@ -1,19 +1,39 @@
 ﻿@model SubmenuTransacciones
 
-<ul class="nav nav-pills nav-fill mb-3">
+<style>
+    .nav-personalizado .nav-item {
+        margin-right: 5px; /* Añade un margen a la derecha de cada elemento */
+    }
+
+    .nav-personalizado .nav-link {
+        font-size: 0.8rem; /* Reduce el tamaño de la fuente */
+        padding: 5px 10px; /* Reduce el padding para hacer el nav-item más chico */
+        background-color: #f0f0f0; /* Establece un color de fondo gris claro para todos los nav-link */
+        color: #333; /* Color del texto */
+    }
+
+        .nav-personalizado .nav-link.active {
+            background-color: #d6d6d6; /* Un gris más oscuro para el item activo */
+            color: #fff; /* Color de texto para el item activo */
+        }
+</style>
+
+<ul class="nav nav-pills nav-fill mb-3 nav-personalizado">
     <li class="nav-item">
-        <a class="nav-link @(Model == SubmenuTransacciones.Diario ? "active" : null )" asp-action="Index">Diario</a>
+        <a class="nav-link @(Model == SubmenuTransacciones.Diario ? "active" : null)" asp-action="Index">Diario</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link @(Model == SubmenuTransacciones.Semanal ? "active" : null )" asp-action="Semanal">Semanal</a>
+        <a class="nav-link @(Model == SubmenuTransacciones.Semanal ? "active" : null)" asp-action="Semanal">Semanal</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link @(Model == SubmenuTransacciones.Mensual ? "active" : null )" asp-action="Mensual">Mensual</a>
+        <a class="nav-link @(Model == SubmenuTransacciones.Mensual ? "active" : null)" asp-action="Mensual">Mensual</a>
     </li>
-@*    <li class="nav-item">
-        <a class="nav-link @(Model == SubmenuTransacciones.Excel ? "active" : null )" asp-action="ExcelReporte">Excel</a>
-    </li> *@
+    <!-- Comentado
     <li class="nav-item">
-        <a class="nav-link @(Model == SubmenuTransacciones.Calendario ? "active" : null )" asp-action="Calendario">Calendario</a>
+        <a class="nav-link @(Model == SubmenuTransacciones.Excel ? "active" : null)" asp-action="ExcelReporte">Excel</a>
+    </li>
+    -->
+    <li class="nav-item">
+        <a class="nav-link @(Model == SubmenuTransacciones.Calendario ? "active" : null)" asp-action="Calendario">Calendario</a>
     </li>
 </ul>

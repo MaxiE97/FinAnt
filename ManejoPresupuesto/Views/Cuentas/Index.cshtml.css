@@ -1,10 +1,13 @@
-﻿h1 {
-    color: darkred;
+﻿p {
+    color: #4f4f4f; /* Un tono de gris más claro para el título */
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.1); /* Sombras suaves para mejorar legibilidad */
 }
 
 .acordeon-cuentas button {
-    color: black !important;
-    font-size: 20px;
+    color: #343a40 !important; /* Texto en gris oscuro para contraste */
+    font-size: 18px; /* Ajuste de tamaño de fuente más adecuado */
+    background-color: #e9ecef; /* Fondo gris claro */
+    border-color: #dee2e6; /* Borde en un tono de gris que combine */
 }
 
     .acordeon-cuentas button > span {
@@ -16,8 +19,23 @@
 .acordeon-cuentas ul li {
     display: flex;
     justify-content: space-between;
+    background-color: #f8f9fa; /* Un fondo gris muy claro para los ítems */
+    border-bottom: 1px solid #dee2e6; /* Borde suave para separar ítems */
+    color: #343a40; /* Texto en gris oscuro para contrastar con el fondo */
+    padding: 0.5rem;
 }
 
-.acordeon-cuentas .acordeon-collapse {
-    font-size: 18px;
+/* Botones de acción con íconos */
+.btn-primary, .btn-danger {
+    filter: none; /* Removemos el filtro para un color más claro */
+    padding: 0.25rem 0.5rem; /* Ajustamos el relleno */
+    font-size: 0.875rem; /* Reducimos el tamaño de la fuente para botones más pequeños */
 }
+
+/* Iconos de editar y borrar más estéticos y menos intrusivos */
+.bi-pencil-fill, .bi-trash-fill {
+    color: #495057; /* Color gris más oscuro para los iconos */
+    opacity: 1; /* Mantenemos la opacidad al pasar el ratón */
+}
+
+
