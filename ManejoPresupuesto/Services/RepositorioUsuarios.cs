@@ -8,17 +8,12 @@ namespace ManejoPresupuesto.Services
     {
         Task<Usuario> BuscarUsuarioPorEmail(string emailNormalizado);
         Task<Usuario> BuscarUsuarioPorId(int usuarioId);
-<<<<<<< HEAD
         Task CargarDatosParaInvitado(int usuarioId);
         Task<int> CrearUsuario(Usuario usuario);
         Task<int> CrearUsuarioInvitado();
         Task EliminarUsuarioInvitado(int usuarioId);
         Task<(Dictionary<int, string> categorias, Dictionary<int, string> cuentas)> ObtenerCategoriasYCuentasInvitado(int usuarioId);
-=======
-        Task<int> CrearUsuario(Usuario usuario);
-        Task<int> CrearUsuarioInvitado();
-        Task EliminarUsuarioInvitado(int usuarioId);
->>>>>>> 780e977998c67ff0afd2a1dd0708c8619cf57c92
+
     }
     public class RepositorioUsuarios: IRepositorioUsuarios
     {
@@ -55,7 +50,6 @@ namespace ManejoPresupuesto.Services
             return usuarioId;
         }
 
-<<<<<<< HEAD
         public async Task<(Dictionary<int, string> categorias, Dictionary<int, string> cuentas)> ObtenerCategoriasYCuentasInvitado(int usuarioId)
         {
             using var connection = new SqlConnection(_connectionString);
@@ -121,8 +115,6 @@ namespace ManejoPresupuesto.Services
             }
         }
 
-=======
->>>>>>> 780e977998c67ff0afd2a1dd0708c8619cf57c92
         public async Task<Usuario> BuscarUsuarioPorId(int usuarioId)
         {
             using var connection = new SqlConnection(_connectionString);

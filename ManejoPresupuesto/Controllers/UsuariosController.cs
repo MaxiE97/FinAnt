@@ -104,7 +104,6 @@ namespace ManejoPresupuesto.Controllers
             // Crear un usuario invitado en la base de datos
             var usuarioId = await repositorioUsuarios.CrearUsuarioInvitado();
 
-<<<<<<< HEAD
             await repositorioUsuarios.CargarDatosParaInvitado(usuarioId);
 
             var usuario = await repositorioUsuarios.BuscarUsuarioPorId(usuarioId);
@@ -113,17 +112,16 @@ namespace ManejoPresupuesto.Controllers
             await signInManager.SignInAsync(usuario, isPersistent: false);
 
             return RedirectToAction("Index", "Transaccion");
-=======
+
             // Aquí asumimos que tienes una forma de obtener el usuario recién creado por ID
             // Esto podría requerir modificar tu repositorio para incluir tal método
-            var usuario = await repositorioUsuarios.BuscarUsuarioPorId(usuarioId);
+             usuario = await repositorioUsuarios.BuscarUsuarioPorId(usuarioId);
 
             // Iniciar sesión con el usuario invitado
             // Asegúrate de tener una forma de diferenciar a este usuario para poder borrar sus datos más tarde si es necesario
             await signInManager.SignInAsync(usuario, isPersistent: false);
 
             return RedirectToAction("Index", "Transaccion"); // O donde quieras dirigir al usuario invitado
->>>>>>> 780e977998c67ff0afd2a1dd0708c8619cf57c92
         }
 
 
