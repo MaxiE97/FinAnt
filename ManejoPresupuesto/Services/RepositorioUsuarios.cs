@@ -8,9 +8,17 @@ namespace ManejoPresupuesto.Services
     {
         Task<Usuario> BuscarUsuarioPorEmail(string emailNormalizado);
         Task<Usuario> BuscarUsuarioPorId(int usuarioId);
+<<<<<<< HEAD
+        Task CargarDatosParaInvitado(int usuarioId);
         Task<int> CrearUsuario(Usuario usuario);
         Task<int> CrearUsuarioInvitado();
         Task EliminarUsuarioInvitado(int usuarioId);
+        Task<(Dictionary<int, string> categorias, Dictionary<int, string> cuentas)> ObtenerCategoriasYCuentasInvitado(int usuarioId);
+=======
+        Task<int> CrearUsuario(Usuario usuario);
+        Task<int> CrearUsuarioInvitado();
+        Task EliminarUsuarioInvitado(int usuarioId);
+>>>>>>> 780e977998c67ff0afd2a1dd0708c8619cf57c92
     }
     public class RepositorioUsuarios: IRepositorioUsuarios
     {
@@ -47,6 +55,74 @@ namespace ManejoPresupuesto.Services
             return usuarioId;
         }
 
+<<<<<<< HEAD
+        public async Task<(Dictionary<int, string> categorias, Dictionary<int, string> cuentas)> ObtenerCategoriasYCuentasInvitado(int usuarioId)
+        {
+            using var connection = new SqlConnection(_connectionString);
+
+            var categorias = new Dictionary<int, string>();
+            var cuentas = new Dictionary<int, string>();
+
+            // Obtener categorías
+            var categoriasQuery = await connection.QueryAsync<dynamic>("SELECT Id, Nombre FROM Categoria WHERE UsuarioId = @UsuarioId", new { UsuarioId = usuarioId });
+            foreach (var categoria in categoriasQuery)
+            {
+                categorias.Add(categoria.Id, categoria.Nombre);
+            }
+
+            // Obtener cuentas
+            var cuentasQuery = await connection.QueryAsync<dynamic>(
+                "SELECT Cuenta.Id, Cuenta.Nombre " +
+                "FROM Cuenta " +
+                "JOIN TiposCuentas ON Cuenta.TipoCuentaId = TiposCuentas.Id " +
+                "WHERE TiposCuentas.UsuarioId = @UsuarioId",
+                new { UsuarioId = usuarioId }
+            );
+            foreach (var cuenta in cuentasQuery)
+            {
+                cuentas.Add(cuenta.Id, cuenta.Nombre);
+            }
+
+            return (categorias, cuentas);
+        }
+
+
+        public async Task CargarDatosParaInvitado(int usuarioId)
+        {
+            using var connection = new SqlConnection(_connectionString);
+
+            // Obtener categorías y cuentas del usuario invitado
+            var (categoriasDict, cuentasDict) = await ObtenerCategoriasYCuentasInvitado(usuarioId);
+
+            foreach (var transaccion in DatosEjemploInvitado.Transacciones)
+            {
+                int categoriaId = categoriasDict.FirstOrDefault(x => x.Value == transaccion.CategoriaNombre).Key;
+                int cuentaId = cuentasDict.FirstOrDefault(x => x.Value == transaccion.CuentaNombre).Key;
+
+
+
+                // Actualizar el balance de la cuenta
+                await connection.ExecuteAsync(
+                    "UPDATE Cuenta SET Balance = Balance + @Monto WHERE Id = @CuentaId",
+                    new { Monto = transaccion.Monto, CuentaId = cuentaId });
+
+
+                await connection.ExecuteAsync(
+                    "INSERT INTO Transacciones (UsuarioId, FechaTransaccion, Monto, CuentaId, CategoriaId) VALUES (@UsuarioId, @FechaTransaccion, ABS(@Monto), @CuentaId, @CategoriaId)",
+                    new
+                    {
+                        UsuarioId = usuarioId,
+                        FechaTransaccion = transaccion.FechaTransaccion,
+                        Monto = transaccion.Monto,
+                        CuentaId = cuentaId,
+                        CategoriaId = categoriaId
+                    });
+
+            }
+        }
+
+=======
+>>>>>>> 780e977998c67ff0afd2a1dd0708c8619cf57c92
         public async Task<Usuario> BuscarUsuarioPorId(int usuarioId)
         {
             using var connection = new SqlConnection(_connectionString);
