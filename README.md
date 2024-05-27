@@ -4,7 +4,6 @@
 
 FinAnt es una página web diseñada para el seguimiento y control de ingresos y egresos personales, brindando una solución práctica para mantener sus finanzas organizadas. Con una interfaz intuitiva, esta aplicación permite llevar un registro detallado de sus transacciones, establecer categorías personalizadas y obtener una visión general clara de su situación financiera.
 
-Página web: https://finantapp.azurewebsites.net/
 
 **Características principales:**
 - Registro de ingresos y egresos
