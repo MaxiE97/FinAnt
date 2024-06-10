@@ -1,5 +1,8 @@
 # FinAnt 🐜
 
+![Captura de pantalla de FinAnt](Assets/vistaInicial.png)
+
+
 ## Resumen
 
 FinAnt es una página web diseñada para el seguimiento y control de ingresos y egresos personales, brindando una solución práctica para mantener sus finanzas organizadas. Con una interfaz intuitiva, esta aplicación permite llevar un registro detallado de sus transacciones, establecer categorías personalizadas y obtener una visión general clara de su situación financiera.
@@ -21,7 +24,6 @@ FinAnt es una página web diseñada para el seguimiento y control de ingresos y 
 - Páginas web: Razor Pages
 - Diseño y maquetación: Bootstrap, jQuery
 
-![Captura de pantalla de FinAnt](Assets/vistaInicial.png)
 
 ## Base de Datos
 
