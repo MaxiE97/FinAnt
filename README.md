@@ -36,4 +36,4 @@ El proyecto utiliza SQL Server como sistema de gestión de base de datos. A cont
 
 En esta aplicación, Dapper se utiliza en los repositorios para interactuar con la base de datos. Los repositorios implementan interfaces que definen los métodos necesarios para realizar operaciones en las diferentes entidades. Gracias a Dapper, estas operaciones se ejecutan de manera eficiente mediante consultas SQL y procedimientos almacenados. Al combinar Dapper con el patrón de repositorio, se logra una separación clara entre la lógica de acceso a datos y el resto de la aplicación.
 
-![Diagrama de la Base de Datos](Assets/baseDatos.png)
+![Diagrama de la Base de Datos](Assets/Base_datos.png)
