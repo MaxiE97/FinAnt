@@ -1,8 +1,25 @@
 # FinAnt 🐜
 
-FinAnt es una web diseñada para el seguimiento de ingresos y egresos. En la cual se implementó una arquitectura MVC usando C# y ASP.NET Core como lenguaje y framework principal, respectivamente. Para la gestión de la base de datos, se utilizó SQL Server, complementando dicho desarrollo con tecnologías como Dapper, Razor Pages, Bootstrap y jQuery.
+## Resumen
 
-Pantalla de inicio:
+FinAnt es una página web diseñada para el seguimiento y control de ingresos y egresos personales, brindando una solución práctica para mantener sus finanzas organizadas. Con una interfaz intuitiva, esta aplicación permite llevar un registro detallado de sus transacciones, establecer categorías personalizadas y obtener una visión general clara de su situación financiera.
+
+
+**Características principales:**
+- Registro de ingresos y egresos
+- Categorización de transacciones
+- Gestión de cuentas 
+- Resumen de finanzas por períodos de tiempo
+- Autenticación y autorización de usuarios
+
+**Tecnologías utilizadas:**
+- Lenguaje de programación: C#
+- Framework: ASP.NET Core
+- Patrón de arquitectura: Modelo-Vista-Controlador (MVC) con una capa adicional de servicios donde se implementa el patrón de repositorio
+- Base de datos: SQL Server
+- ORM: Dapper (Micro ORM para acceso a datos)
+- Páginas web: Razor Pages
+- Diseño y maquetación: Bootstrap, jQuery
 
 ![Captura de pantalla de FinAnt](Assets/vistaInicial.png)
 
@@ -10,13 +27,13 @@ Pantalla de inicio:
 
 El proyecto utiliza SQL Server como sistema de gestión de base de datos. A continuación se hace un breve descripción de cada entidad utilizada: 
 
-- **Usuarios**: Almacena información de los usuarios de la aplicación.
-- **Transacciones**: Registra los ingresos y egresos de los usuarios.
-- **Cuenta**: Registra la cuenta perteneciente de donde el usuario realizo una transacción
+- **Usuario**: Almacena información de los usuarios de la aplicación.
+- **Transaccion**: Registra los ingresos y egresos de los usuarios.
+- **Cuenta**: Registra la cuenta perteneciente de donde el usuario realizo una transacción.
+- **TipoCuenta**: Registra una clasificación para agrupar las diferentes cuentas.
+- **Categoria**: Registra una clasiicación a la que puede pertenecer una transacción.
+- **TipoOperación**: Define el estado de una categoría, si es un ingreso o gasto.  
 
-Para el acceso y manipulación de datos, el proyecto hace uso de Dapper, un micro ORM que facilita el mapeo entre la base de datos y los objetos de la aplicación, ofreciendo una alta eficiencia en las operaciones de base de datos.
+En esta aplicación, Dapper se utiliza en los repositorios para interactuar con la base de datos. Los repositorios implementan interfaces que definen los métodos necesarios para realizar operaciones en las diferentes entidades. Gracias a Dapper, estas operaciones se ejecutan de manera eficiente mediante consultas SQL y procedimientos almacenados. Al combinar Dapper con el patrón de repositorio, se logra una separación clara entre la lógica de acceso a datos y el resto de la aplicación.
 
 ![Diagrama de la Base de Datos](Assets/baseDatos.png)
-
-
-
