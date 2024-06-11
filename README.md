@@ -24,6 +24,9 @@ FinAnt es una página web diseñada para el seguimiento y control de ingresos y 
 - Páginas web: Razor Pages
 - Diseño y maquetación: Bootstrap, jQuery
 
+  <img src="Assets/transacciones.gif" alt="Descripción del GIF 1" width="800"/>
+  <img src="Assets/calendario.gif" alt="Descripción del GIF 2" width="800"/>
+  <img src="Assets/otros.gif" alt="Descripción del GIF 3" width="800"/>
 
 ## Base de Datos
 
@@ -38,4 +41,5 @@ El proyecto utiliza SQL Server como sistema de gestión de base de datos. A cont
 
 En esta aplicación, Dapper se utiliza en los repositorios para interactuar con la base de datos. Los repositorios implementan interfaces que definen los métodos necesarios para realizar operaciones en las diferentes entidades. Gracias a Dapper, estas operaciones se ejecutan de manera eficiente mediante consultas SQL y procedimientos almacenados. Al combinar Dapper con el patrón de repositorio, se logra una separación clara entre la lógica de acceso a datos y el resto de la aplicación.
 
-![Diagrama de la Base de Datos](Assets/Base_datos.png)
+<img src="Assets/Base_datos.png" alt="Descripción del GIF 3" width="800"/>
+
